@@ -1,20 +1,19 @@
+'use client'
 import { TopMenu } from "@/components";
 import { BlogButton } from "@/components/ui/button/BlogButton";
 import { blogs } from "@/data/bloginfo";
 import { Share2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { BiShareAlt } from "react-icons/bi";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { RiArrowLeftSLine } from "react-icons/ri";
 
-interface BlogPageParams {
-    params: {
-        blog: string;
-    };
-}
-export default function BlogPage({ params }: BlogPageParams) {
-    const { blog } = params;
+
+export default function BlogPage() {
+    const blog = decodeURIComponent(useParams().blog as string);
+
     const blogIndex = parseInt(blog, 10) - 1;
 
     if (isNaN(blogIndex) || blogIndex < 0 || blogIndex >= blogs.length) {
